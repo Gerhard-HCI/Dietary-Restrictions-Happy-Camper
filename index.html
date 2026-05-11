@@ -282,11 +282,11 @@ position: relative;
 display: inline-flex;
 align-items: center;
 padding: 9px 14px;
-background: #ffffff;
-border: 1px solid #c9bfa8;
+background: #ffffff !important;
+border: 1.5px solid #9a8f72 !important;
 border-radius: 999px;
 font-size: 14px;
-color: var(–ink-soft);
+color: #1a1815 !important;
 cursor: pointer;
 user-select: none;
 transition: all 0.18s ease;
@@ -295,10 +295,10 @@ min-height: 40px;
 .pill input { position: absolute; opacity: 0; pointer-events: none; }
 .pill:hover { border-color: var(–gold-soft); }
 .pill.checked {
-background: var(–gold-bg);
-border-color: var(–gold);
-color: var(–ink);
-font-weight: 500;
+background: #e8c976 !important;
+border-color: #8a6520 !important;
+color: #3a2810 !important;
+font-weight: 600;
 }
 
 /* –––– INGREDIENT ROWS –––– */
@@ -324,10 +324,10 @@ flex: 1 1 auto;
 text-align: center;
 font-size: 13px;
 padding: 8px 10px;
-border: 1px solid #c9bfa8;
-background: #ffffff;
+border: 1.5px solid #9a8f72 !important;
+background: #ffffff !important;
 border-radius: var(–radius-sm);
-color: var(–ink-soft);
+color: #1a1815 !important;
 cursor: pointer;
 user-select: none;
 transition: all 0.15s ease;
@@ -337,11 +337,11 @@ min-width: 60px;
 }
 .ing-pill input { display: none; }
 .ing-pill:hover { border-color: var(–gold-soft); }
-.ing-pill.checked-none   { background: #d8d2c4; border-color: #6c6557; color: #2a2620; font-weight: 500; }
-.ing-pill.checked-severe { background: #e89478; border-color: #8a2e1a; color: #4a1408; font-weight: 600; }
-.ing-pill.checked-mild   { background: #f0d27a; border-color: #a07820; color: #4a3410; font-weight: 600; }
-.ing-pill.checked-rel    { background: #b8b0d4; border-color: #4a3d6b; color: #221a3a; font-weight: 600; }
-.ing-pill.checked-pref   { background: #e8c976; border-color: #8a6520; color: #3a2810; font-weight: 600; }
+.ing-pill.checked-none   { background: #b8b0a0 !important; border-color: #4a4438 !important; color: #1a1610 !important; font-weight: 600; }
+.ing-pill.checked-severe { background: #d6604a !important; border-color: #6a1f10 !important; color: #ffffff !important; font-weight: 700; }
+.ing-pill.checked-mild   { background: #e8b830 !important; border-color: #8a6010 !important; color: #2a1f08 !important; font-weight: 700; }
+.ing-pill.checked-rel    { background: #8a82b0 !important; border-color: #2a2050 !important; color: #ffffff !important; font-weight: 700; }
+.ing-pill.checked-pref   { background: #d8a838 !important; border-color: #6a4a10 !important; color: #2a1f08 !important; font-weight: 700; }
 
 /* –––– SUB-GROUP (conditional) –––– */
 .subgroup {
@@ -684,7 +684,7 @@ body { background: white; }
 <header class="statusbar" role="banner">
   <div class="statusbar-left">
     <span class="statusbar-dot" aria-hidden="true"></span>
-    <span>Happy Camper</span>
+    <span>Happy Camper · v2</span>
   </div>
   <div>
     <span class="save-indicator" id="saveIndicator">✓ Saved</span>
