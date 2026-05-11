@@ -1,1 +1,1669 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#faf6ef">
+<title>Dietary &amp; Allergy Questionnaire · Happy Camper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   HAPPY CAMPER · DIETARY & ALLERGY QUESTIONNAIRE
+   Generic, reusable across HC clients
+   ========================================================= */
+
+:root {
+–bg: #faf6ef;
+–bg-elev: #ffffff;
+–bg-soft: #f3ede1;
+–ink: #1a1815;
+–ink-soft: #5c564d;
+–ink-muted: #8a8275;
+–line: #e8e1d5;
+–line-soft: #f0e9dc;
+–gold: #b8924a;
+–gold-soft: #d9c39a;
+–gold-bg: #f5ecd9;
+–red: #a4422c;
+–red-soft: #f4e3dc;
+–green: #6b7c3d;
+–green-soft: #e8eddb;
+–whatsapp: #128c7e;
+–shadow-sm: 0 1px 2px rgba(26,24,21,0.04), 0 1px 3px rgba(26,24,21,0.03);
+–shadow-md: 0 2px 6px rgba(26,24,21,0.05), 0 8px 24px rgba(26,24,21,0.04);
+–shadow-lg: 0 4px 12px rgba(26,24,21,0.06), 0 16px 40px rgba(26,24,21,0.06);
+–radius-sm: 6px;
+–radius-md: 10px;
+–radius-lg: 16px;
+–font-display: ‘Cormorant Garamond’, Georgia, serif;
+–font-body: ‘Jost’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, sans-serif;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+font-family: var(–font-body);
+font-weight: 400;
+font-size: 16px;
+line-height: 1.6;
+color: var(–ink);
+background: var(–bg);
+min-height: 100vh;
+padding-bottom: env(safe-area-inset-bottom);
+overflow-x: hidden;
+}
+
+.shell { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+/* –––– STATUS BAR –––– */
+.statusbar {
+position: sticky; top: 0; z-index: 50;
+background: rgba(250,246,239,0.92);
+backdrop-filter: saturate(180%) blur(12px);
+-webkit-backdrop-filter: saturate(180%) blur(12px);
+border-bottom: 1px solid var(–line-soft);
+padding: 10px 20px;
+display: flex; align-items: center; justify-content: space-between;
+font-size: 12px;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(–ink-soft);
+}
+.statusbar-left { display: flex; align-items: center; gap: 10px; }
+.statusbar-dot { width: 6px; height: 6px; border-radius: 50%; background: var(–gold); }
+.save-indicator {
+font-size: 11px; color: var(–green);
+opacity: 0; transition: opacity 0.4s ease;
+letter-spacing: 0.06em;
+}
+.save-indicator.show { opacity: 1; }
+
+/* –––– HERO –––– */
+.hero {
+text-align: center;
+padding: 56px 24px 40px;
+position: relative;
+}
+.hero::before, .hero::after {
+content: ‘’; position: absolute; left: 50%; transform: translateX(-50%);
+width: 36px; height: 1px; background: var(–gold);
+}
+.hero::before { top: 36px; }
+.hero::after { bottom: 24px; width: 80px; opacity: 0.4; }
+.hero-eyebrow {
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 18px;
+min-height: 14px;
+}
+.hero-eyebrow:empty { margin-bottom: 0; }
+.hero-title {
+font-family: var(–font-display);
+font-weight: 500;
+font-size: 42px;
+line-height: 1.08;
+letter-spacing: -0.01em;
+color: var(–ink);
+margin-bottom: 14px;
+}
+.hero-title em { font-style: italic; font-weight: 400; }
+.hero-subtitle {
+font-family: var(–font-display);
+font-style: italic;
+font-size: 20px;
+color: var(–ink-soft);
+margin-bottom: 8px;
+}
+.hero-subtitle:empty { display: none; }
+.hero-meta {
+font-size: 12px;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(–ink-muted);
+margin-top: 6px;
+}
+.hero-meta:empty { display: none; }
+
+/* –––– INTRO CARD –––– */
+.intro-card {
+background: var(–bg-elev);
+border: 1px solid var(–line);
+border-radius: var(–radius-lg);
+padding: 28px 24px;
+margin-bottom: 32px;
+box-shadow: var(–shadow-md);
+}
+.intro-card p.lead {
+font-family: var(–font-display);
+font-size: 19px;
+line-height: 1.5;
+color: var(–ink);
+margin-bottom: 18px;
+}
+.intro-points { list-style: none; }
+.intro-points li {
+position: relative;
+padding: 10px 0 10px 22px;
+font-size: 14px;
+line-height: 1.55;
+color: var(–ink-soft);
+border-top: 1px solid var(–line-soft);
+}
+.intro-points li:first-child { border-top: none; }
+.intro-points li::before {
+content: ‘’; position: absolute; left: 0; top: 17px;
+width: 6px; height: 6px; background: var(–gold); border-radius: 50%;
+}
+
+/* –––– PROGRESS –––– */
+.progress-wrap {
+margin: 0 0 36px;
+padding: 16px 20px;
+background: var(–bg-elev);
+border: 1px solid var(–line);
+border-radius: var(–radius-md);
+box-shadow: var(–shadow-sm);
+}
+.progress-label {
+display: flex; justify-content: space-between; align-items: baseline;
+font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–ink-muted); margin-bottom: 10px;
+}
+.progress-label strong {
+font-family: var(–font-display);
+font-size: 20px; font-weight: 500;
+color: var(–gold); text-transform: none; letter-spacing: 0;
+}
+.progress-bar {
+height: 3px; background: var(–line-soft); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+height: 100%; width: 0%;
+background: linear-gradient(90deg, var(–gold-soft), var(–gold));
+transition: width 0.5s cubic-bezier(.2,.7,.2,1);
+}
+
+/* –––– SECTION –––– */
+.section {
+background: var(–bg-elev);
+border: 1px solid var(–line);
+border-radius: var(–radius-lg);
+padding: 28px 22px;
+margin-bottom: 22px;
+box-shadow: var(–shadow-sm);
+transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.section.active { box-shadow: var(–shadow-md); border-color: var(–gold-soft); }
+.section-num {
+display: inline-block;
+font-family: var(–font-display);
+font-style: italic;
+font-size: 13px;
+color: var(–gold);
+letter-spacing: 0.12em;
+margin-bottom: 4px;
+}
+.section-title {
+font-family: var(–font-display);
+font-weight: 500;
+font-size: 26px;
+line-height: 1.15;
+color: var(–ink);
+margin-bottom: 6px;
+}
+.section-sub {
+font-size: 13px;
+color: var(–ink-muted);
+margin-bottom: 22px;
+line-height: 1.5;
+}
+.section-divider {
+height: 1px; background: var(–line-soft);
+margin: 22px 0;
+}
+.subhead {
+font-family: var(–font-display);
+font-size: 20px;
+font-weight: 500;
+margin-bottom: 8px;
+color: var(–ink);
+}
+.subhead-note {
+font-size: 12px;
+color: var(–ink-muted);
+margin-bottom: 14px;
+font-style: italic;
+}
+
+/* –––– QUESTION –––– */
+.q { margin-bottom: 22px; }
+.q:last-child { margin-bottom: 0; }
+.q-label {
+display: block;
+font-size: 14px; font-weight: 500;
+color: var(–ink);
+margin-bottom: 4px;
+}
+.q-label .req { color: var(–red); margin-left: 4px; }
+
+/* –––– INPUTS –––– */
+.input, .textarea {
+width: 100%;
+font-family: var(–font-body);
+font-size: 16px;
+color: var(–ink);
+background: var(–bg);
+border: 1px solid var(–line);
+border-radius: var(–radius-sm);
+padding: 12px 14px;
+transition: border-color 0.2s ease, background 0.2s ease;
+-webkit-appearance: none;
+appearance: none;
+}
+.input:focus, .textarea:focus {
+outline: none;
+border-color: var(–gold);
+background: var(–bg-elev);
+}
+.textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+
+/* –––– PILLS –––– */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+position: relative;
+display: inline-flex;
+align-items: center;
+padding: 9px 14px;
+background: var(–bg);
+border: 1px solid var(–line);
+border-radius: 999px;
+font-size: 14px;
+color: var(–ink-soft);
+cursor: pointer;
+user-select: none;
+transition: all 0.18s ease;
+min-height: 40px;
+}
+.pill input { position: absolute; opacity: 0; pointer-events: none; }
+.pill:hover { border-color: var(–gold-soft); }
+.pill.checked {
+background: var(–gold-bg);
+border-color: var(–gold);
+color: var(–ink);
+font-weight: 500;
+}
+
+/* –––– INGREDIENT ROWS –––– */
+.ing-row { padding: 14px 0; border-top: 1px solid var(–line-soft); }
+.ing-row:first-child { border-top: none; padding-top: 4px; }
+.ing-name {
+font-size: 15px;
+font-weight: 500;
+color: var(–ink);
+margin-bottom: 10px;
+display: flex; align-items: center; justify-content: space-between;
+}
+.ing-name .ing-note {
+font-size: 11px;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+color: var(–ink-muted);
+font-weight: 400;
+}
+.ing-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.ing-pill {
+flex: 1 1 auto;
+text-align: center;
+font-size: 13px;
+padding: 8px 10px;
+border: 1px solid var(–line);
+background: var(–bg);
+border-radius: var(–radius-sm);
+color: var(–ink-soft);
+cursor: pointer;
+user-select: none;
+transition: all 0.15s ease;
+min-height: 38px;
+display: flex; align-items: center; justify-content: center;
+min-width: 60px;
+}
+.ing-pill input { display: none; }
+.ing-pill:hover { border-color: var(–gold-soft); }
+.ing-pill.checked-none { background: var(–bg-soft); border-color: var(–ink-muted); color: var(–ink-soft); }
+.ing-pill.checked-severe { background: var(–red-soft); border-color: var(–red); color: var(–red); font-weight: 500; }
+.ing-pill.checked-mild { background: #fdf4e3; border-color: #d4a64a; color: #7a5a1f; font-weight: 500; }
+.ing-pill.checked-rel { background: #e8e6f0; border-color: #6b5b8a; color: #4a3d6b; font-weight: 500; }
+.ing-pill.checked-pref { background: var(–gold-bg); border-color: var(–gold); color: var(–ink); font-weight: 500; }
+
+/* –––– SUB-GROUP (conditional) –––– */
+.subgroup {
+margin-top: 18px;
+padding: 18px;
+background: var(–bg-soft);
+border-radius: var(–radius-md);
+border-left: 3px solid var(–gold);
+display: none;
+}
+.subgroup.show { display: block; animation: fadeSlide 0.4s ease; }
+.subgroup-title {
+font-family: var(–font-display);
+font-style: italic;
+font-size: 18px;
+color: var(–ink);
+margin-bottom: 4px;
+}
+.subgroup-note {
+font-size: 12px;
+color: var(–ink-muted);
+margin-bottom: 14px;
+line-height: 1.5;
+}
+@keyframes fadeSlide {
+from { opacity: 0; transform: translateY(-4px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* –––– BINARY –––– */
+.binary { display: flex; gap: 8px; }
+.binary .pill { flex: 1; justify-content: center; }
+
+/* –––– LEGEND –––– */
+.legend {
+display: flex; flex-wrap: wrap; gap: 12px;
+padding: 12px 14px;
+background: var(–bg-soft);
+border-radius: var(–radius-sm);
+font-size: 11px;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+color: var(–ink-muted);
+margin-bottom: 18px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-swatch.severe { background: var(–red); }
+.legend-swatch.mild { background: #d4a64a; }
+.legend-swatch.rel { background: #6b5b8a; }
+.legend-swatch.pref { background: var(–gold); }
+
+/* –––– CRITICAL CALLOUT –––– */
+.callout-critical {
+background: var(–red-soft);
+border: 1px solid var(–red);
+border-radius: var(–radius-md);
+padding: 16px 18px;
+margin-top: 14px;
+}
+.callout-critical-title {
+font-family: var(–font-display);
+font-style: italic;
+font-size: 16px;
+color: var(–red);
+margin-bottom: 4px;
+}
+.callout-critical p {
+font-size: 13px;
+line-height: 1.55;
+color: var(–ink);
+}
+
+/* –––– ACKNOWLEDGMENT –––– */
+.ack {
+display: flex;
+gap: 14px;
+padding: 16px;
+background: var(–bg-soft);
+border: 1px solid var(–line);
+border-radius: var(–radius-md);
+cursor: pointer;
+transition: all 0.2s ease;
+}
+.ack.checked { background: var(–green-soft); border-color: var(–green); }
+.ack input { position: absolute; opacity: 0; pointer-events: none; }
+.ack-box {
+flex-shrink: 0;
+width: 22px; height: 22px;
+border: 1.5px solid var(–ink-soft);
+border-radius: 4px;
+background: var(–bg-elev);
+display: flex; align-items: center; justify-content: center;
+transition: all 0.2s ease;
+margin-top: 1px;
+}
+.ack.checked .ack-box { background: var(–green); border-color: var(–green); }
+.ack-check {
+color: var(–bg-elev);
+font-size: 14px;
+opacity: 0;
+transition: opacity 0.15s ease;
+}
+.ack.checked .ack-check { opacity: 1; }
+.ack-text { font-size: 14px; line-height: 1.5; color: var(–ink); }
+
+/* –––– SUBMIT AREA –––– */
+.submit-area {
+margin-top: 36px;
+padding: 32px 24px;
+background: linear-gradient(180deg, var(–bg-elev) 0%, var(–gold-bg) 100%);
+border: 1px solid var(–line);
+border-radius: var(–radius-lg);
+text-align: center;
+box-shadow: var(–shadow-md);
+}
+.submit-title {
+font-family: var(–font-display);
+font-weight: 500;
+font-size: 26px;
+margin-bottom: 8px;
+color: var(–ink);
+}
+.submit-sub {
+font-size: 14px;
+color: var(–ink-soft);
+margin-bottom: 22px;
+line-height: 1.55;
+}
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-family: var(–font-body);
+font-size: 14px;
+font-weight: 500;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+padding: 14px 22px;
+border: 1px solid var(–ink);
+background: var(–ink);
+color: var(–bg);
+border-radius: var(–radius-sm);
+cursor: pointer;
+transition: all 0.2s ease;
+text-decoration: none;
+min-height: 48px;
+width: 100%;
+margin-bottom: 10px;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(–shadow-md); }
+.btn:active { transform: translateY(0); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn-secondary {
+background: transparent;
+color: var(–ink);
+border-color: var(–line);
+}
+.btn-secondary:hover { border-color: var(–ink); }
+.btn-whatsapp {
+background: var(–whatsapp);
+border-color: var(–whatsapp);
+color: white;
+}
+.btn-whatsapp:hover { background: #0e7568; border-color: #0e7568; }
+
+/* –––– MODAL –––– */
+.modal-overlay {
+position: fixed; inset: 0;
+background: rgba(26,24,21,0.5);
+backdrop-filter: blur(4px);
+z-index: 100;
+display: none;
+align-items: flex-start;
+justify-content: center;
+padding: 24px 16px;
+overflow-y: auto;
+}
+.modal-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+background: var(–bg);
+border-radius: var(–radius-lg);
+max-width: 640px;
+width: 100%;
+margin: auto;
+box-shadow: var(–shadow-lg);
+overflow: hidden;
+animation: modalSlide 0.35s cubic-bezier(.2,.7,.2,1);
+}
+@keyframes modalSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-header { padding: 24px 24px 0; position: relative; }
+.modal-close {
+position: absolute; top: 18px; right: 18px;
+width: 32px; height: 32px;
+border: none;
+background: var(–line-soft);
+border-radius: 50%;
+cursor: pointer;
+font-size: 18px;
+color: var(–ink);
+display: flex; align-items: center; justify-content: center;
+}
+.modal-eyebrow {
+font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+color: var(–gold); margin-bottom: 6px;
+}
+.modal-title {
+font-family: var(–font-display);
+font-weight: 500;
+font-size: 28px;
+line-height: 1.1;
+color: var(–ink);
+margin-bottom: 16px;
+}
+.modal-body { padding: 0 24px 24px; }
+.modal-intro {
+font-size: 14px;
+color: var(–ink-soft);
+margin-bottom: 14px;
+line-height: 1.55;
+}
+.summary-content {
+background: var(–bg-elev);
+border: 1px solid var(–line);
+border-radius: var(–radius-md);
+padding: 18px;
+max-height: 280px;
+overflow-y: auto;
+font-family: var(–font-body);
+font-size: 13px;
+line-height: 1.6;
+color: var(–ink);
+white-space: pre-wrap;
+word-break: break-word;
+margin-bottom: 16px;
+}
+.modal-actions { display: flex; flex-direction: column; gap: 8px; }
+.modal-actions .btn { margin-bottom: 0; }
+
+/* –––– SUCCESS STATE –––– */
+.success-block {
+text-align: center;
+padding: 8px 0 16px;
+}
+.success-icon {
+width: 64px; height: 64px;
+margin: 0 auto 16px;
+border-radius: 50%;
+background: var(–green-soft);
+display: flex; align-items: center; justify-content: center;
+font-size: 32px;
+color: var(–green);
+}
+.success-block p {
+font-size: 15px;
+line-height: 1.55;
+color: var(–ink-soft);
+}
+
+/* –––– ERROR –––– */
+.field-error {
+font-size: 12px;
+color: var(–red);
+margin-top: 6px;
+display: none;
+}
+.field-error.show { display: block; }
+.input.error, .textarea.error { border-color: var(–red); background: var(–red-soft); }
+
+/* –––– FOOTER –––– */
+.footer {
+text-align: center;
+padding: 40px 20px 24px;
+font-size: 11px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–ink-muted);
+}
+.footer-mark {
+font-family: var(–font-display);
+font-style: italic;
+font-size: 14px;
+letter-spacing: 0.02em;
+text-transform: none;
+color: var(–gold);
+margin-bottom: 8px;
+}
+.footer-divider {
+width: 30px; height: 1px;
+background: var(–gold);
+margin: 12px auto;
+opacity: 0.5;
+}
+
+/* –––– TOAST –––– */
+.toast {
+position: fixed;
+bottom: 24px;
+left: 50%;
+transform: translateX(-50%) translateY(20px);
+background: var(–ink);
+color: var(–bg);
+padding: 12px 20px;
+border-radius: 999px;
+font-size: 13px;
+letter-spacing: 0.04em;
+z-index: 200;
+opacity: 0;
+transition: all 0.3s ease;
+pointer-events: none;
+box-shadow: var(–shadow-lg);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (min-width: 600px) {
+.hero-title { font-size: 52px; }
+.section { padding: 32px 28px; }
+.ing-pill { font-size: 14px; }
+}
+
+.sr-only {
+position: absolute; width: 1px; height: 1px;
+padding: 0; margin: -1px; overflow: hidden;
+clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+:focus-visible { outline: 2px solid var(–gold); outline-offset: 2px; }
+
+@media print {
+.statusbar, .progress-wrap, .submit-area, .footer { display: none; }
+.section, .intro-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+body { background: white; }
+}
+</style>
+
+</head>
+<body>
+
+<header class="statusbar" role="banner">
+  <div class="statusbar-left">
+    <span class="statusbar-dot" aria-hidden="true"></span>
+    <span>Happy Camper</span>
+  </div>
+  <div>
+    <span class="save-indicator" id="saveIndicator">✓ Saved</span>
+  </div>
+</header>
+
+<main class="shell">
+
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-eyebrow" id="heroEyebrow"></div>
+    <h1 class="hero-title" id="heroTitle">Dietary &amp; <em>Allergy</em><br>Questionnaire</h1>
+    <p class="hero-subtitle" id="heroSubtitle"></p>
+    <p class="hero-meta" id="heroMeta"></p>
+  </section>
+
+  <div class="intro-card">
+    <p class="lead">To ensure the best possible dining experience in Japan, many restaurants require detailed dietary information well in advance. Please answer carefully and as specifically as possible.</p>
+    <ul class="intro-points">
+      <li>Japanese fine dining restaurants often prepare ingredients and menus specifically for each guest.</li>
+      <li>Last-minute changes may not be possible once preparations have begun.</li>
+      <li>Some severe allergies or strict dietary requirements may not be fully accommodatable in traditional Japanese kitchens.</li>
+      <li>“Dislike” and “medical or religious restriction” are treated very differently in Japan — please be precise.</li>
+    </ul>
+  </div>
+
+  <div class="progress-wrap" role="status" aria-live="polite">
+    <div class="progress-label">
+      <span>Your responses</span>
+      <strong><span id="progressPct">0</span>% complete</strong>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <form id="questionnaire" novalidate>
+
+```
+<section class="section" data-section="1">
+  <div class="section-num">— Section One —</div>
+  <h2 class="section-title">Guest Information</h2>
+  <p class="section-sub">One form per guest. If multiple guests are travelling, each adult (and the guardian of any child) should complete a separate response.</p>
+
+  <div class="q">
+    <label class="q-label" for="guestName">Full name <span class="req">*</span></label>
+    <input class="input" type="text" id="guestName" name="guestName" autocomplete="name" placeholder="First and last name" required>
+    <div class="field-error" id="err-guestName">Please enter your full name.</div>
+  </div>
+
+  <div class="q">
+    <label class="q-label" for="guestEmail">Email <span class="req">*</span></label>
+    <input class="input" type="email" id="guestEmail" name="guestEmail" autocomplete="email" placeholder="your@email.com" required>
+    <div class="field-error" id="err-guestEmail">Please enter a valid email address.</div>
+  </div>
+</section>
+
+<section class="section" data-section="2">
+  <div class="section-num">— Section Two —</div>
+  <h2 class="section-title">Dietary Preference</h2>
+  <p class="section-sub">Select all that apply to your overall way of eating.</p>
+
+  <div class="q">
+    <div class="pills" role="group" aria-label="Dietary preferences">
+      <label class="pill"><input type="checkbox" name="diet" value="none"><span>No restrictions</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="vegetarian"><span>Vegetarian</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="vegan"><span>Vegan</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="pescatarian"><span>Pescatarian</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="halal"><span>Halal</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="kosher"><span>Kosher-style</span></label>
+      <label class="pill"><input type="checkbox" name="diet" value="gluten-free"><span>Gluten-free</span></label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="q-label" for="dietOther">Other dietary preference</label>
+    <input class="input" type="text" id="dietOther" name="dietOther" placeholder="If applicable, please describe">
+  </div>
+
+  <div class="subgroup" id="vegSubgroup">
+    <p class="subgroup-title">For vegetarians &amp; vegans</p>
+    <p class="subgroup-note">Traditional Japanese cuisine frequently uses bonito dashi (fish stock), even in vegetable dishes. Please clarify what is acceptable.</p>
+
+    <div class="ing-row">
+      <div class="ing-name">Eggs</div>
+      <div class="ing-pills">
+        <label class="ing-pill"><input type="radio" name="veg-eggs" value="yes">Acceptable</label>
+        <label class="ing-pill"><input type="radio" name="veg-eggs" value="no">Not acceptable</label>
+      </div>
+    </div>
+
+    <div class="ing-row">
+      <div class="ing-name">Dairy products</div>
+      <div class="ing-pills">
+        <label class="ing-pill"><input type="radio" name="veg-dairy" value="yes">Acceptable</label>
+        <label class="ing-pill"><input type="radio" name="veg-dairy" value="no">Not acceptable</label>
+      </div>
+    </div>
+
+    <div class="ing-row">
+      <div class="ing-name">Bonito dashi (fish stock)</div>
+      <div class="ing-pills">
+        <label class="ing-pill"><input type="radio" name="veg-dashi" value="yes">Acceptable</label>
+        <label class="ing-pill"><input type="radio" name="veg-dashi" value="no">Not acceptable</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-section="3">
+  <div class="section-num">— Section Three —</div>
+  <h2 class="section-title">Allergies &amp; Ingredients to Avoid</h2>
+  <p class="section-sub">For each ingredient, indicate the type of restriction. Leave items unmarked if there is no restriction at all.</p>
+
+  <div class="legend" aria-hidden="true">
+    <div class="legend-item"><span class="legend-swatch severe"></span>Severe allergy</div>
+    <div class="legend-item"><span class="legend-swatch mild"></span>Mild / intolerance</div>
+    <div class="legend-item"><span class="legend-swatch rel"></span>Religious</div>
+    <div class="legend-item"><span class="legend-swatch pref"></span>Personal dislike</div>
+  </div>
+
+  <h3 class="subhead">Seafood</h3>
+  <p class="subhead-note">For religious fish restrictions, please specify in Section 6 whether only scaled fish is permitted.</p>
+  <div id="seafoodGroup"></div>
+
+  <div class="section-divider"></div>
+
+  <h3 class="subhead">Meat &amp; Poultry</h3>
+  <div id="meatGroup"></div>
+</section>
+
+<section class="section" data-section="4">
+  <div class="section-num">— Section Four —</div>
+  <h2 class="section-title">Gluten &amp; Soy Sauce</h2>
+  <p class="section-sub">Most soy sauce in Japan contains wheat. Gluten-free tamari is available on request at high-end restaurants if specified well in advance.</p>
+
+  <div class="q">
+    <span class="q-label">Do you require gluten-free soy sauce?</span>
+    <div class="binary" role="radiogroup" aria-label="Gluten-free soy sauce required">
+      <label class="pill"><input type="radio" name="glutenFree" value="yes"><span>Yes</span></label>
+      <label class="pill"><input type="radio" name="glutenFree" value="no"><span>No</span></label>
+    </div>
+  </div>
+
+  <div class="subgroup" id="glutenReasonSub">
+    <p class="subgroup-title">Please specify the reason</p>
+    <div class="pills" role="radiogroup" aria-label="Gluten restriction reason">
+      <label class="pill"><input type="radio" name="glutenReason" value="celiac"><span>Celiac disease</span></label>
+      <label class="pill"><input type="radio" name="glutenReason" value="intolerance"><span>Gluten intolerance</span></label>
+      <label class="pill"><input type="radio" name="glutenReason" value="preference"><span>Preference only</span></label>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-section="5">
+  <div class="section-num">— Section Five —</div>
+  <h2 class="section-title">Nuts, Sesame &amp; Oils</h2>
+  <p class="section-sub">Sesame in particular is widely used in Japanese cuisine. If you have any restriction here, please be precise.</p>
+
+  <div id="nutsGroup"></div>
+
+  <div class="subgroup" id="nutsSeveritySub">
+    <p class="subgroup-title">Severity</p>
+    <p class="subgroup-note">For any restriction above, please indicate the severity.</p>
+    <div class="pills" role="radiogroup" aria-label="Nuts severity">
+      <label class="pill"><input type="radio" name="nutsSeverity" value="airborne"><span>Airborne / contact</span></label>
+      <label class="pill"><input type="radio" name="nutsSeverity" value="ingestion"><span>Ingestion only</span></label>
+      <label class="pill"><input type="radio" name="nutsSeverity" value="mild"><span>Mild intolerance</span></label>
+      <label class="pill"><input type="radio" name="nutsSeverity" value="preference"><span>Preference only</span></label>
+    </div>
+  </div>
+</section>
+
+<section class="section" data-section="6">
+  <div class="section-num">— Section Six —</div>
+  <h2 class="section-title">Additional Ingredients</h2>
+  <p class="section-sub">Please list any additional ingredients or preparations you prefer not to eat — for example uni (sea urchin), organ meats, mushrooms, natto, or particular textures.</p>
+
+  <div class="q">
+    <label class="sr-only" for="additionalAvoid">Additional ingredients to avoid</label>
+    <textarea class="textarea" id="additionalAvoid" name="additionalAvoid" placeholder="e.g. No uni, no organ meats, no raw mushrooms…"></textarea>
+  </div>
+</section>
+
+<section class="section" data-section="7">
+  <div class="section-num">— Section Seven —</div>
+  <h2 class="section-title">Cross-Contamination</h2>
+  <p class="section-sub">In intimate counter kitchens, complete separation can be challenging. Please indicate the level of care required.</p>
+
+  <div class="pills" role="radiogroup" aria-label="Cross-contamination tolerance">
+    <label class="pill" style="width:100%; justify-content:flex-start;"><input type="radio" name="cross" value="minor-ok"><span>Minor contact / cross-contamination is acceptable</span></label>
+    <label class="pill" style="width:100%; justify-content:flex-start;"><input type="radio" name="cross" value="minimise"><span>Cross-contamination should be minimised where possible</span></label>
+    <label class="pill" style="width:100%; justify-content:flex-start;"><input type="radio" name="cross" value="strict"><span>Strict separation required for medical reasons</span></label>
+  </div>
+</section>
+
+<section class="section" data-section="8">
+  <div class="section-num">— Section Eight —</div>
+  <h2 class="section-title">Important Acknowledgment</h2>
+  <p class="section-sub">Before submitting, please confirm you have read and understood the operational notes.</p>
+
+  <div class="callout-critical">
+    <div class="callout-critical-title">A note on fragrance</div>
+    <p>At omakase counters, please avoid all perfume, cologne, scented hair products, and strongly scented laundry detergents on the day of dining. This is the single most important etiquette point at high-end Japanese restaurants.</p>
+  </div>
+
+  <div style="height:14px;"></div>
+
+  <label class="ack" id="ackLabel">
+    <input type="checkbox" id="acknowledge" name="acknowledge" required>
+    <span class="ack-box" aria-hidden="true"><span class="ack-check">✓</span></span>
+    <span class="ack-text">I understand that Japanese fine dining restaurants prepare bespoke menus in advance, that last-minute changes may not be possible, and that the answers I have provided will be shared with chefs and restaurants in good faith.</span>
+  </label>
+  <div class="field-error" id="err-acknowledge" style="margin-top:10px;">Please acknowledge before submitting.</div>
+</section>
+
+<section class="submit-area">
+  <h2 class="submit-title">Ready to send</h2>
+  <p class="submit-sub" id="submitSub">When you submit, your responses will be sent to Happy Camper.</p>
+
+  <button type="submit" class="btn" id="submitBtn">Submit questionnaire</button>
+  <button type="button" class="btn btn-secondary" id="resetBtn">Clear all answers</button>
+</section>
+```
+
+  </form>
+
+  <footer class="footer">
+    <div class="footer-mark">Happy Camper Ltd.</div>
+    <div>Tokyo · Kyoto · London</div>
+    <div class="footer-divider"></div>
+    <div>hello@happycamper.food · +81 90 6158 9006</div>
+  </footer>
+
+</main>
+
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" id="modalClose" aria-label="Close" type="button">✕</button>
+      <div class="modal-eyebrow" id="modalEyebrow">Almost done</div>
+      <h2 class="modal-title" id="modalTitle">Send your summary</h2>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <p class="modal-intro" id="modalIntro">Please send to Happy Camper using one of the options below. The team will share it with the restaurants.</p>
+      <pre class="summary-content" id="summaryContent"></pre>
+      <div class="modal-actions" id="modalActions">
+        <a class="btn btn-whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+        <a class="btn" id="emailBtn" href="#">Send via email</a>
+        <button class="btn btn-secondary" id="copyBtn" type="button">Copy to clipboard</button>
+        <button class="btn btn-secondary" id="downloadBtn" type="button">Download as text file</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   HAPPY CAMPER · DIETARY QUESTIONNAIRE
+   Single file, reusable across trips.
+   ========================================================= */
+
+(function () {
+  'use strict';
+
+  /* =======================================================
+     [1] CONFIGURATION — EDIT THESE FOR EACH TRIP
+     -------------------------------------------------------
+     Everything client-specific lives here. Nothing else
+     in the file needs to change between trips.
+     ======================================================= */
+  var CONFIG = {
+
+    // ---------- BRANDING (Hero section) ----------
+    // Small uppercase label above the title. '' to hide.
+    eyebrow: 'Private Travel · Japan',
+
+    // Italic subtitle below the title. '' to hide.
+    subtitle: 'A bespoke journey curated by Happy Camper',
+
+    // Optional dates/destinations line. '' to hide.
+    // Example: 'Tokyo · Kyoto · April 2026'
+    meta: '',
+
+    // ---------- SUBMISSION ----------
+    // PRIMARY · Set this and responses are POSTed automatically
+    // to your inbox. Use Formspree (free, ~2 min at formspree.io)
+    // or any compatible JSON webhook (Web3Forms, Basin, etc).
+    // Format: 'https://formspree.io/f/xxxxxxxx'
+    // Leave '' to use email/WhatsApp fallbacks only.
+    submitEndpoint: '',
+
+    // FALLBACKS · always available in the share modal
+    recipientEmail: 'hello@happycamper.food',
+    recipientPhone: '819061589006',  // WhatsApp: international, digits only, no +
+    ccEmail: '',
+
+    // ---------- INTERNAL ----------
+    storageKey: 'hc_diet_q_v1',
+    tripLabel: 'Happy Camper'
+  };
+
+  /* =======================================================
+     [2] DATA MODEL — ingredient lists per the blueprint
+     ======================================================= */
+  var SEAFOOD = [
+    { id: 'shrimp', name: 'Shrimp / Prawns' },
+    { id: 'crab', name: 'Crab' },
+    { id: 'lobster', name: 'Lobster' },
+    { id: 'squid', name: 'Squid' },
+    { id: 'octopus', name: 'Octopus' },
+    { id: 'scallops', name: 'Scallops' },
+    { id: 'shellfish', name: 'Shellfish / Clams / Oysters' },
+    { id: 'anago', name: 'Sea eel (Anago)' },
+    { id: 'whitefish', name: 'White fish' },
+    { id: 'raw', name: 'Raw fish / Sushi' }
+  ];
+
+  var MEAT = [
+    { id: 'beef', name: 'Beef' },
+    { id: 'pork', name: 'Pork' },
+    { id: 'chicken', name: 'Chicken' },
+    { id: 'duck', name: 'Duck' },
+    { id: 'lamb', name: 'Lamb' }
+  ];
+
+  var NUTS = [
+    { id: 'peanuts', name: 'Peanuts' },
+    { id: 'treenuts', name: 'Tree nuts' },
+    { id: 'sesame', name: 'Sesame', note: 'common in Japan' },
+    { id: 'sesame-oil', name: 'Sesame oil' }
+  ];
+
+  var SEVERITY = [
+    { val: 'none',   label: 'No restriction' },
+    { val: 'severe', label: 'Severe' },
+    { val: 'mild',   label: 'Mild' },
+    { val: 'rel',    label: 'Religious' },
+    { val: 'pref',   label: 'Dislike' }
+  ];
+
+  var BINARY = [
+    { val: 'no',  label: 'No restriction' },
+    { val: 'yes', label: 'Yes — restricted' }
+  ];
+
+  var SEVERITY_CLASS_MAP = {
+    none: 'checked-none', severe: 'checked-severe', mild: 'checked-mild',
+    rel: 'checked-rel', pref: 'checked-pref',
+    yes: 'checked-severe', no: 'checked-none'
+  };
+
+  /* =======================================================
+     [3] HELPERS
+     ======================================================= */
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx) {
+    return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
+  }
+
+  // Test once whether localStorage works (some sandboxed iframe
+  // contexts deny it). We degrade silently if unavailable.
+  var storage = (function () {
+    try {
+      var k = '__hc_test__';
+      window.localStorage.setItem(k, '1');
+      window.localStorage.removeItem(k);
+      return window.localStorage;
+    } catch (e) {
+      return null;
+    }
+  })();
+
+  /* =======================================================
+     [4] HERO INJECTION
+     ======================================================= */
+  function paintHero() {
+    var eb = $('#heroEyebrow');
+    var sb = $('#heroSubtitle');
+    var mt = $('#heroMeta');
+    if (eb) eb.textContent = CONFIG.eyebrow || '';
+    if (sb) sb.textContent = CONFIG.subtitle || '';
+    if (mt) mt.textContent = CONFIG.meta || '';
+
+    var submitSub = $('#submitSub');
+    if (submitSub) {
+      if (CONFIG.submitEndpoint) {
+        submitSub.textContent = 'Your responses will be sent directly to Happy Camper for sharing with the restaurants.';
+      } else {
+        submitSub.textContent = 'When you submit, you’ll see your summary with options to send via WhatsApp or email.';
+      }
+    }
+  }
+
+  /* =======================================================
+     [5] BUILD INGREDIENT ROWS
+     ======================================================= */
+  function buildIngredientRows(containerSelector, items, namePrefix, options) {
+    var wrap = $(containerSelector);
+    if (!wrap) return;
+    var opts = options || SEVERITY;
+    items.forEach(function (item) {
+      var row = document.createElement('div');
+      row.className = 'ing-row';
+      var noteHTML = item.note ? '<span class="ing-note">' + item.note + '</span>' : '';
+      var pillsHTML = opts.map(function (opt) {
+        return ''
+          + '<label class="ing-pill">'
+          +   '<input type="radio" name="' + namePrefix + '-' + item.id + '" value="' + opt.val + '">'
+          +   opt.label
+          + '</label>';
+      }).join('');
+      row.innerHTML = ''
+        + '<div class="ing-name"><span>' + item.name + '</span>' + noteHTML + '</div>'
+        + '<div class="ing-pills">' + pillsHTML + '</div>';
+      wrap.appendChild(row);
+    });
+  }
+
+  /* =======================================================
+     [6] VISUAL STATE SYNC
+     Derived from input state on every change. Idempotent.
+     ======================================================= */
+  function syncVisualState() {
+    // .pill (radio or checkbox)
+    $$('.pill').forEach(function (label) {
+      var input = label.querySelector('input');
+      if (!input) return;
+      if (input.checked) label.classList.add('checked');
+      else label.classList.remove('checked');
+    });
+
+    // .ing-pill — reset then mark checked
+    $$('.ing-pill').forEach(function (label) {
+      label.className = 'ing-pill';
+    });
+    $$('.ing-pill input').forEach(function (input) {
+      if (!input.checked) return;
+      var label = input.parentNode;
+      if (!label) return;
+      var cls = SEVERITY_CLASS_MAP[input.value];
+      if (cls) label.classList.add(cls);
+    });
+
+    // Acknowledgment
+    var ack = $('#acknowledge');
+    var ackLabel = $('#ackLabel');
+    if (ack && ackLabel) {
+      if (ack.checked) ackLabel.classList.add('checked');
+      else ackLabel.classList.remove('checked');
+    }
+  }
+
+  /* =======================================================
+     [7] CONDITIONAL SUB-GROUPS
+     ======================================================= */
+  function refreshConditionals() {
+    var vegOn = $$('input[name="diet"]:checked').some(function (i) {
+      return i.value === 'vegetarian' || i.value === 'vegan';
+    });
+    var veg = $('#vegSubgroup');
+    if (veg) veg.classList.toggle('show', vegOn);
+
+    var glutenYes = !!$('input[name="glutenFree"][value="yes"]:checked');
+    var glutenSub = $('#glutenReasonSub');
+    if (glutenSub) glutenSub.classList.toggle('show', glutenYes);
+
+    var anyNut = NUTS.some(function (n) {
+      return !!$('input[name="nut-' + n.id + '"][value="yes"]:checked');
+    });
+    var nutSub = $('#nutsSeveritySub');
+    if (nutSub) nutSub.classList.toggle('show', anyNut);
+  }
+
+  /* =======================================================
+     [8] COLLECT FORM DATA
+     ======================================================= */
+  function collect() {
+    var form = $('#questionnaire');
+    if (!form) return {};
+    var fd = new FormData(form);
+    var data = {};
+    fd.forEach(function (v, k) {
+      if (data[k] === undefined) data[k] = v;
+      else if (Object.prototype.toString.call(data[k]) === '[object Array]') data[k].push(v);
+      else data[k] = [data[k], v];
+    });
+    return data;
+  }
+
+  /* =======================================================
+     [9] PROGRESS
+     ======================================================= */
+  function calcProgress() {
+    var checks = [
+      function () {
+        var el = $('#guestName');
+        return !!el && el.value.trim().length > 1;
+      },
+      function () {
+        var el = $('#guestEmail');
+        return !!el && /\S+@\S+\.\S+/.test(el.value);
+      },
+      function () {
+        var other = $('#dietOther');
+        return $$('input[name="diet"]:checked').length > 0
+          || (other && other.value.trim().length > 0);
+      },
+      function () {
+        return SEAFOOD.some(function (s) { return !!$('input[name="sea-' + s.id + '"]:checked'); })
+          || MEAT.some(function (m) { return !!$('input[name="meat-' + m.id + '"]:checked'); });
+      },
+      function () { return $$('input[name="glutenFree"]:checked').length > 0; },
+      function () {
+        return NUTS.some(function (n) { return !!$('input[name="nut-' + n.id + '"]:checked'); });
+      },
+      function () {
+        var ta = $('#additionalAvoid');
+        return (ta && ta.getAttribute('data-touched') === '1')
+          || $$('input[name="cross"]:checked').length > 0;
+      },
+      function () { return $$('input[name="cross"]:checked').length > 0; },
+      function () { var a = $('#acknowledge'); return !!a && !!a.checked; }
+    ];
+    var done = 0;
+    for (var i = 0; i < checks.length; i++) {
+      try { if (checks[i]()) done++; } catch (e) {}
+    }
+    return Math.round(done / checks.length * 100);
+  }
+
+  /* =======================================================
+     [10] AUTOSAVE
+     ======================================================= */
+  var saveTimer = null;
+  function autosave() {
+    if (!storage) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try {
+        var data = collect();
+        data._meta = { savedAt: new Date().toISOString() };
+        storage.setItem(CONFIG.storageKey, JSON.stringify(data));
+        flashSaved();
+      } catch (e) {}
+    }, 400);
+  }
+  function flashSaved() {
+    var el = $('#saveIndicator');
+    if (!el) return;
+    el.classList.add('show');
+    clearTimeout(flashSaved._t);
+    flashSaved._t = setTimeout(function () { el.classList.remove('show'); }, 1400);
+  }
+  function restoreFromStorage() {
+    if (!storage) return;
+    try {
+      var raw = storage.getItem(CONFIG.storageKey);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      Object.keys(data).forEach(function (k) {
+        if (k.charAt(0) === '_') return;
+        var inputs = $$('[name="' + k + '"]');
+        if (!inputs.length) return;
+        var first = inputs[0];
+        var v = data[k];
+        if (first.type === 'checkbox') {
+          var values = Object.prototype.toString.call(v) === '[object Array]' ? v : [v];
+          inputs.forEach(function (i) { i.checked = values.indexOf(i.value) !== -1; });
+        } else if (first.type === 'radio') {
+          inputs.forEach(function (i) { i.checked = (i.value === v); });
+        } else {
+          first.value = v;
+          if (first.id === 'additionalAvoid' && String(v).length > 0) {
+            first.setAttribute('data-touched', '1');
+          }
+        }
+      });
+    } catch (e) {}
+  }
+
+  /* =======================================================
+     [11] CENTRAL CHANGE HANDLER
+     ======================================================= */
+  function onChange() {
+    syncVisualState();
+    refreshConditionals();
+    var pct = calcProgress();
+    var pctEl = $('#progressPct');
+    var fill  = $('#progressFill');
+    if (pctEl) pctEl.textContent = pct;
+    if (fill)  fill.style.width = pct + '%';
+    autosave();
+  }
+
+  /* =======================================================
+     [12] SUMMARY BUILDER
+     ======================================================= */
+  function humanise(v) {
+    var map = {
+      'none': 'No restrictions', 'vegetarian': 'Vegetarian', 'vegan': 'Vegan',
+      'pescatarian': 'Pescatarian', 'halal': 'Halal', 'kosher': 'Kosher-style',
+      'gluten-free': 'Gluten-free', 'celiac': 'Celiac disease',
+      'intolerance': 'Gluten intolerance', 'preference': 'Preference only',
+      'airborne': 'Airborne / contact allergy', 'ingestion': 'Ingestion only',
+      'mild': 'Mild intolerance'
+    };
+    return map[v] || v;
+  }
+  function humaniseSeverity(v) {
+    return ({
+      severe: 'SEVERE ALLERGY',
+      mild:   'Mild allergy / intolerance',
+      rel:    'Religious restriction',
+      pref:   'Personal dislike / preference'
+    })[v] || v;
+  }
+  function buildSummary() {
+    var d = collect();
+    var lines = [];
+    function push(s) { lines.push(s || ''); }
+    function heading(s) { push(''); push('— ' + s.toUpperCase() + ' —'); }
+
+    push('DIETARY & ALLERGY QUESTIONNAIRE');
+    push(CONFIG.tripLabel + (CONFIG.meta ? ' · ' + CONFIG.meta : ''));
+    push('Guest: ' + (d.guestName || '(unspecified)'));
+    push('Email: ' + (d.guestEmail || '(unspecified)'));
+    push('Submitted: ' + new Date().toLocaleString('en-GB', { dateStyle: 'long', timeStyle: 'short' }));
+
+    heading('Dietary preference');
+    var diet = [].concat(d.diet || []);
+    if (diet.length) push(diet.map(humanise).join(', '));
+    else push('No specific dietary preference indicated.');
+    if (d.dietOther) push('Other: ' + d.dietOther);
+    if (d['veg-eggs'] || d['veg-dairy'] || d['veg-dashi']) {
+      push('');
+      push('Vegetarian / vegan sub-questions:');
+      if (d['veg-eggs'])  push('  · Eggs: '  + (d['veg-eggs']  === 'yes' ? 'acceptable' : 'NOT acceptable'));
+      if (d['veg-dairy']) push('  · Dairy: ' + (d['veg-dairy'] === 'yes' ? 'acceptable' : 'NOT acceptable'));
+      if (d['veg-dashi']) push('  · Bonito dashi: ' + (d['veg-dashi'] === 'yes' ? 'acceptable' : 'NOT acceptable'));
+    }
+
+    var seaItems = SEAFOOD
+      .map(function (s) { return { name: s.name, v: d['sea-' + s.id] }; })
+      .filter(function (x) { return x.v && x.v !== 'none'; });
+    heading('Seafood restrictions');
+    if (seaItems.length) {
+      seaItems.forEach(function (x) { push('  · ' + x.name + ' — ' + humaniseSeverity(x.v)); });
+    } else {
+      push('  · No seafood restrictions indicated.');
+    }
+
+    var meatItems = MEAT
+      .map(function (s) { return { name: s.name, v: d['meat-' + s.id] }; })
+      .filter(function (x) { return x.v && x.v !== 'none'; });
+    heading('Meat & poultry restrictions');
+    if (meatItems.length) {
+      meatItems.forEach(function (x) { push('  · ' + x.name + ' — ' + humaniseSeverity(x.v)); });
+    } else {
+      push('  · No meat or poultry restrictions indicated.');
+    }
+
+    heading('Gluten / soy sauce');
+    if (d.glutenFree === 'yes') {
+      push('  · Gluten-free soy sauce required.');
+      if (d.glutenReason) push('  · Reason: ' + humanise(d.glutenReason));
+    } else if (d.glutenFree === 'no') {
+      push('  · Gluten-free soy sauce not required.');
+    } else {
+      push('  · Not answered.');
+    }
+
+    var nutItems = NUTS
+      .map(function (n) { return { name: n.name, v: d['nut-' + n.id] }; })
+      .filter(function (x) { return x.v === 'yes'; });
+    heading('Nuts, sesame & oils');
+    if (nutItems.length) {
+      nutItems.forEach(function (x) { push('  · ' + x.name + ' — restriction'); });
+      if (d.nutsSeverity) push('  · Severity: ' + humanise(d.nutsSeverity));
+    } else {
+      push('  · No restrictions indicated.');
+    }
+
+    heading('Additional ingredients to avoid');
+    push((d.additionalAvoid || '').trim() ? d.additionalAvoid.trim() : '  · None specified.');
+
+    heading('Cross-contamination');
+    var crossMap = {
+      'minor-ok': 'Minor contact / cross-contamination is acceptable.',
+      'minimise': 'Cross-contamination should be minimised where possible.',
+      'strict':   'Strict separation required for medical reasons.'
+    };
+    push('  · ' + (crossMap[d.cross] || 'Not answered.'));
+
+    heading('Acknowledgment');
+    push(d.acknowledge ? '  · Operational constraints acknowledged.' : '  · NOT acknowledged.');
+
+    push('');
+    push('— end of summary —');
+    return lines.join('\n');
+  }
+
+  /* =======================================================
+     [13] VALIDATION
+     ======================================================= */
+  function validate() {
+    var ok = true;
+    var name = $('#guestName');
+    if (!name || name.value.trim().length < 2) {
+      if (name) name.classList.add('error');
+      $('#err-guestName').classList.add('show');
+      ok = false;
+    } else {
+      name.classList.remove('error');
+      $('#err-guestName').classList.remove('show');
+    }
+    var email = $('#guestEmail');
+    if (!email || !/\S+@\S+\.\S+/.test(email.value)) {
+      if (email) email.classList.add('error');
+      $('#err-guestEmail').classList.add('show');
+      ok = false;
+    } else {
+      email.classList.remove('error');
+      $('#err-guestEmail').classList.remove('show');
+    }
+    var ack = $('#acknowledge');
+    if (!ack || !ack.checked) {
+      $('#err-acknowledge').classList.add('show');
+      ok = false;
+    } else {
+      $('#err-acknowledge').classList.remove('show');
+    }
+    return ok;
+  }
+
+  /* =======================================================
+     [14] SUBMISSION
+     ======================================================= */
+  function openShareModal(summary) {
+    $('#modalEyebrow').textContent = 'Almost done';
+    $('#modalTitle').textContent = 'Send your summary';
+    $('#modalIntro').textContent = 'Please send to Happy Camper using one of the options below. The team will share it with the restaurants.';
+    $('#summaryContent').textContent = summary;
+    $('#summaryContent').style.display = '';
+    $('#modalActions').style.display = '';
+
+    var wa = $('#whatsappBtn');
+    if (CONFIG.recipientPhone) {
+      wa.href = 'https://wa.me/' + CONFIG.recipientPhone + '?text=' + encodeURIComponent(summary);
+      wa.style.display = '';
+    } else {
+      wa.style.display = 'none';
+    }
+
+    var guestName = (($('#guestName').value || '') + '').trim();
+    var subj = encodeURIComponent('Dietary Questionnaire — ' + guestName);
+    var body = encodeURIComponent(summary);
+    var href = 'mailto:' + CONFIG.recipientEmail + '?subject=' + subj + '&body=' + body;
+    if (CONFIG.ccEmail) href += '&cc=' + encodeURIComponent(CONFIG.ccEmail);
+    $('#emailBtn').href = href;
+
+    showModal();
+  }
+
+  function showSuccessState() {
+    $('#modalEyebrow').textContent = 'Submitted';
+    $('#modalTitle').textContent = 'Thank you';
+    $('#modalIntro').innerHTML = ''
+      + '<div class="success-block">'
+      +   '<div class="success-icon">✓</div>'
+      +   '<p>Your dietary questionnaire has been received by Happy Camper. The team will be in touch shortly.</p>'
+      + '</div>';
+    $('#summaryContent').style.display = 'none';
+    $('#modalActions').style.display = 'none';
+    showModal();
+  }
+
+  function showModal() {
+    $('#modalOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    $('#modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!validate()) {
+      var firstErr = $('.error') || $('.field-error.show');
+      if (firstErr && firstErr.scrollIntoView) {
+        firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      toast('Please complete the highlighted fields.');
+      return;
+    }
+
+    var summary = buildSummary();
+    var data = collect();
+
+    if (CONFIG.submitEndpoint) {
+      var btn = $('#submitBtn');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      var payload = {
+        guestName: data.guestName,
+        guestEmail: data.guestEmail,
+        summary: summary,
+        raw: data,
+        _subject: 'Dietary Questionnaire — ' + (data.guestName || 'Guest')
+      };
+
+      fetch(CONFIG.submitEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        showSuccessState();
+        if (storage) {
+          try { storage.removeItem(CONFIG.storageKey); } catch (e) {}
+        }
+      }).catch(function () {
+        toast('Auto-send unavailable — please use one of the options below.');
+        openShareModal(summary);
+      }).then(function () {
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      });
+    } else {
+      openShareModal(summary);
+    }
+  }
+
+  /* =======================================================
+     [15] EVENT WIRING
+     ======================================================= */
+  function wireEvents() {
+    var form = $('#questionnaire');
+    if (!form) return;
+
+    // Single delegated change/input handler
+    form.addEventListener('change', onChange);
+    form.addEventListener('input', function (e) {
+      var t = e.target;
+      if (!t || !t.matches) return;
+      if (t.matches('textarea, input[type="text"], input[type="email"]')) {
+        if (t.id === 'additionalAvoid' && t.value.trim().length > 0) {
+          t.setAttribute('data-touched', '1');
+        }
+        onChange();
+      }
+    });
+
+    form.addEventListener('submit', handleSubmit);
+
+    var resetBtn = $('#resetBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (!window.confirm('Clear all your answers? This cannot be undone.')) return;
+        if (storage) {
+          try { storage.removeItem(CONFIG.storageKey); } catch (e) {}
+        }
+        form.reset();
+        var ta = $('#additionalAvoid');
+        if (ta) ta.removeAttribute('data-touched');
+        onChange();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        toast('All answers cleared.');
+      });
+    }
+
+    $('#modalClose').addEventListener('click', closeModal);
+    $('#modalOverlay').addEventListener('click', function (e) {
+      if (e.target.id === 'modalOverlay') closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    $('#copyBtn').addEventListener('click', function () {
+      var text = $('#summaryContent').textContent;
+      var done = function () { toast('Summary copied to clipboard.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+      function fallbackCopy() {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy');
+          document.body.removeChild(ta);
+          done();
+        } catch (e) {
+          toast('Copy not supported on this device.');
+        }
+      }
+    });
+
+    $('#downloadBtn').addEventListener('click', function () {
+      try {
+        var text = $('#summaryContent').textContent;
+        var name = (($('#guestName').value || 'guest').trim() || 'guest').replace(/\s+/g, '_');
+        var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = 'Dietary_Questionnaire_' + name + '.txt';
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        toast('Downloaded.');
+      } catch (e) {
+        toast('Download not supported on this device.');
+      }
+    });
+  }
+
+  /* =======================================================
+     [16] TOAST
+     ======================================================= */
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $('#toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+
+  /* =======================================================
+     [17] SECTION OBSERVER (optional)
+     ======================================================= */
+  function wireSectionObserver() {
+    if (typeof window.IntersectionObserver === 'undefined') return;
+    try {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio > 0.4) {
+            $$('.section').forEach(function (s) { s.classList.remove('active'); });
+            e.target.classList.add('active');
+          }
+        });
+      }, { threshold: [0.4] });
+      $$('.section').forEach(function (s) { io.observe(s); });
+    } catch (e) {}
+  }
+
+  /* =======================================================
+     [18] INIT
+     ======================================================= */
+  function init() {
+    try {
+      paintHero();
+      buildIngredientRows('#seafoodGroup', SEAFOOD, 'sea', SEVERITY);
+      buildIngredientRows('#meatGroup',    MEAT,    'meat', SEVERITY);
+      buildIngredientRows('#nutsGroup',    NUTS,    'nut',  BINARY);
+      wireEvents();
+      restoreFromStorage();
+      onChange();
+      wireSectionObserver();
+    } catch (err) {
+      if (window.console && console.error) console.error('[HC questionnaire init]', err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+
+</body>
+</html>
